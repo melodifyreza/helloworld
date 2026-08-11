@@ -1,0 +1,17 @@
+apiVersion: apps/v1          # نسخه API
+kind: Deployment             # نوع آبجکت
+metadata:
+  name: auth-service         # نام این Deployment در etcd
+spec:
+  replicas: 3                # Desired State: چند پاد می‌خواهیم
+  selector:
+    matchLabels:
+      app: auth              # ReplicaSet با این برچسب پادها را پیدا می‌کند
+  template:                  # قالب ساخت پاد (Pod Template)
+    metadata:
+      labels:
+        app: auth            # ⚠️ باید دقیقاً با selector یکی باشد
+    spec:
+      containers:
+      - name: auth           # نام کانتینر
+        image: nginx:latest  # فعلاً nginx برای تست
